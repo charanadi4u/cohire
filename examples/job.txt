@@ -1,0 +1,5 @@
+Python API Engineer
+Required: Python for backend services.
+Required: FastAPI for validated HTTP APIs.
+Required: PostgreSQL for transactional persistence.
+Preferred: GCP deployment experience.

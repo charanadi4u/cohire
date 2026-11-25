@@ -1,0 +1,287 @@
+{
+  "run": {
+    "workflow_id": "a8443eff-6b46-4b52-8e34-d2ef6d524934",
+    "resource_id": "7b258834-8ad9-4e10-a8f8-7ba0fdaaa91b",
+    "state": "queued"
+  },
+  "ranked": [
+    {
+      "id": "6fb0fe3d-efb8-4b42-ae5d-1021e406f23f",
+      "candidate_id": "a63af3c9-4d5f-4497-a8a7-6b7e3a3b5083",
+      "score": 99.99999999999999,
+      "coverage": 0.9999999999999999,
+      "score_upper_bound": 100.0,
+      "review_required": true,
+      "proposal_eligible": true,
+      "strengths": [
+        "R1",
+        "R2",
+        "R3",
+        "R4"
+      ],
+      "gaps": [],
+      "unknowns": [],
+      "assessments": [
+        {
+          "requirement_id": "R1",
+          "status": "supported",
+          "value": 1.0,
+          "candidate_evidence_ids": [
+            "E1"
+          ],
+          "job_evidence_ids": [
+            "E1",
+            "E2"
+          ],
+          "rationale": "Explicit skill evidence."
+        },
+        {
+          "requirement_id": "R2",
+          "status": "supported",
+          "value": 1.0,
+          "candidate_evidence_ids": [
+            "E2"
+          ],
+          "job_evidence_ids": [
+            "E3"
+          ],
+          "rationale": "Explicit skill evidence."
+        },
+        {
+          "requirement_id": "R3",
+          "status": "supported",
+          "value": 1.0,
+          "candidate_evidence_ids": [
+            "E3"
+          ],
+          "job_evidence_ids": [
+            "E4"
+          ],
+          "rationale": "Explicit skill evidence."
+        },
+        {
+          "requirement_id": "R4",
+          "status": "supported",
+          "value": 1.0,
+          "candidate_evidence_ids": [
+            "E4"
+          ],
+          "job_evidence_ids": [
+            "E5"
+          ],
+          "rationale": "Explicit skill evidence."
+        }
+      ],
+      "scoring_version": "weighted-evidence-v1",
+      "rubric": {
+        "R1": 0.3,
+        "R2": 0.3,
+        "R3": 0.3,
+        "R4": 0.1
+      },
+      "candidate_revision": 1,
+      "job_revision": 1,
+      "provenance": {
+        "mode": "demo",
+        "model": "deterministic-demo",
+        "prompt_version": "v1",
+        "schema_version": "v1",
+        "input_hash": "6584873c531cc4468460464f33776a5f29489e78bcae90b501b20b2a29f0b3ca"
+      }
+    },
+    {
+      "id": "faabc01f-06d4-4889-8f98-fee8f4c4db55",
+      "candidate_id": "e3fd52a6-f99b-4e8a-bff4-9e261a5b2777",
+      "score": 60.0,
+      "coverage": 0.6,
+      "score_upper_bound": 100.0,
+      "review_required": true,
+      "proposal_eligible": false,
+      "strengths": [
+        "R1",
+        "R3"
+      ],
+      "gaps": [],
+      "unknowns": [
+        "R2",
+        "R4"
+      ],
+      "assessments": [
+        {
+          "requirement_id": "R1",
+          "status": "supported",
+          "value": 1.0,
+          "candidate_evidence_ids": [
+            "E1"
+          ],
+          "job_evidence_ids": [
+            "E1",
+            "E2"
+          ],
+          "rationale": "Explicit skill evidence."
+        },
+        {
+          "requirement_id": "R2",
+          "status": "unknown",
+          "value": null,
+          "candidate_evidence_ids": [],
+          "job_evidence_ids": [
+            "E3"
+          ],
+          "rationale": "No relevant evidence; recruiter clarification needed."
+        },
+        {
+          "requirement_id": "R3",
+          "status": "supported",
+          "value": 1.0,
+          "candidate_evidence_ids": [
+            "E2"
+          ],
+          "job_evidence_ids": [
+            "E4"
+          ],
+          "rationale": "Explicit skill evidence."
+        },
+        {
+          "requirement_id": "R4",
+          "status": "unknown",
+          "value": null,
+          "candidate_evidence_ids": [],
+          "job_evidence_ids": [
+            "E5"
+          ],
+          "rationale": "No relevant evidence; recruiter clarification needed."
+        }
+      ],
+      "scoring_version": "weighted-evidence-v1",
+      "rubric": {
+        "R1": 0.3,
+        "R2": 0.3,
+        "R3": 0.3,
+        "R4": 0.1
+      },
+      "candidate_revision": 1,
+      "job_revision": 1,
+      "provenance": {
+        "mode": "demo",
+        "model": "deterministic-demo",
+        "prompt_version": "v1",
+        "schema_version": "v1",
+        "input_hash": "b431044886f37c0b4fa9eff8180fce3b17b79e45be56ff5e725aa74598d5b3c3"
+      }
+    },
+    {
+      "id": "77f19031-4ed8-486e-82a8-d10f917c51f6",
+      "candidate_id": "bdf06880-cd6d-4ce3-8aa1-aaedcc299ec9",
+      "score": 0.0,
+      "coverage": 0.0,
+      "score_upper_bound": 100.0,
+      "review_required": true,
+      "proposal_eligible": false,
+      "strengths": [],
+      "gaps": [],
+      "unknowns": [
+        "R1",
+        "R2",
+        "R3",
+        "R4"
+      ],
+      "assessments": [
+        {
+          "requirement_id": "R1",
+          "status": "unknown",
+          "value": null,
+          "candidate_evidence_ids": [],
+          "job_evidence_ids": [
+            "E1",
+            "E2"
+          ],
+          "rationale": "No relevant evidence; recruiter clarification needed."
+        },
+        {
+          "requirement_id": "R2",
+          "status": "unknown",
+          "value": null,
+          "candidate_evidence_ids": [],
+          "job_evidence_ids": [
+            "E3"
+          ],
+          "rationale": "No relevant evidence; recruiter clarification needed."
+        },
+        {
+          "requirement_id": "R3",
+          "status": "unknown",
+          "value": null,
+          "candidate_evidence_ids": [],
+          "job_evidence_ids": [
+            "E4"
+          ],
+          "rationale": "No relevant evidence; recruiter clarification needed."
+        },
+        {
+          "requirement_id": "R4",
+          "status": "unknown",
+          "value": null,
+          "candidate_evidence_ids": [],
+          "job_evidence_ids": [
+            "E5"
+          ],
+          "rationale": "No relevant evidence; recruiter clarification needed."
+        }
+      ],
+      "scoring_version": "weighted-evidence-v1",
+      "rubric": {
+        "R1": 0.3,
+        "R2": 0.3,
+        "R3": 0.3,
+        "R4": 0.1
+      },
+      "candidate_revision": 1,
+      "job_revision": 1,
+      "provenance": {
+        "mode": "demo",
+        "model": "deterministic-demo",
+        "prompt_version": "v1",
+        "schema_version": "v1",
+        "input_hash": "f5208b16315bf916af2a830d732d9f6e9fe1aa0fe73b4b0388c8256ffcd160be"
+      }
+    }
+  ],
+  "proposals": [
+    {
+      "id": "e75b6749-8c8f-45ab-abac-95da2c9c4465",
+      "match_id": "04ca86e3-4950-44cd-88b9-b36f17d33cd0",
+      "candidate_id": "1e1237f1-77bf-4b11-a0d5-1398797d5f7e",
+      "status": "draft",
+      "details": {
+        "reason": "Threshold met; recruiter review required",
+        "external_action": false
+      }
+    },
+    {
+      "id": "f119dd4a-184a-4698-bd79-a32e7c1c037e",
+      "match_id": "6fb0fe3d-efb8-4b42-ae5d-1021e406f23f",
+      "candidate_id": "a63af3c9-4d5f-4497-a8a7-6b7e3a3b5083",
+      "status": "awaiting_candidate_confirmation",
+      "details": {
+        "start": "2026-11-08T17:00:00+00:00",
+        "end": "2026-11-08T17:45:00+00:00",
+        "timezone": "UTC",
+        "message": "We would like to discuss your professional experience. Please confirm whether this proposed time works for you.",
+        "candidate_confirmation": "pending",
+        "calendar_status": "not_booked",
+        "external_action": false,
+        "approved_by": "local-recruiter"
+      }
+    }
+  ],
+  "analytics": {
+    "suppressed": false,
+    "metrics": {
+      "active_candidates": 6,
+      "match_runs": 2
+    },
+    "scope": "current tenant; all retained history",
+    "interpretation": "Descriptive counts only; no causal hiring conclusions."
+  }
+}

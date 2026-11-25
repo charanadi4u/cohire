@@ -1,0 +1,6 @@
+{
+  "status": "passed",
+  "separate_service_processes": 2,
+  "result_equal": true,
+  "operation_id": "restart-verification-01"
+}

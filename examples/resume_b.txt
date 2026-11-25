@@ -1,0 +1,5 @@
+Name: Meera Das
+Email: meera@example.test
+Developed Python data processing and API services.
+Maintained PostgreSQL schemas and optimized queries.
+Owned production incident investigation and documentation.

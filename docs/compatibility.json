@@ -1,0 +1,21 @@
+{
+  "python": "3.12.14",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.39",
+  "packages": {
+    "google-adk": "2.13.0",
+    "a2a-sdk": "1.3.0",
+    "google-genai": "2.34.0",
+    "fastapi": "0.162.0",
+    "pydantic": "2.14.2",
+    "sqlalchemy": "2.1.6",
+    "asyncpg": "0.32.0",
+    "alembic": "1.20.1",
+    "google-cloud-pubsub": "2.43.0",
+    "cryptography": "50.0.2",
+    "pytest": "9.2.0",
+    "httpx": "0.28.1"
+  },
+  "protocol": "A2A 1.0 JSON-RPC",
+  "gemini_model": "not configured; live calls not run",
+  "postgresql": "target 16; live database not tested"
+}

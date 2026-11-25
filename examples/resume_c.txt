@@ -1,0 +1,4 @@
+Name: Kabir Sen
+Email: kabir@example.test
+Developed Java backend services for order processing.
+Created automated integration tests and operational runbooks.

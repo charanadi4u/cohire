@@ -1,0 +1,6 @@
+Name: Aarav Rao
+Email: aarav@example.test
+Built Python backend services for inventory workflows.
+Implemented FastAPI endpoints with validation and automated tests.
+Maintained PostgreSQL schemas, migrations and queries.
+Deployed services on GCP with monitoring.
