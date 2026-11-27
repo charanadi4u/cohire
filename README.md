@@ -17,13 +17,14 @@ Install Python 3.12. Extract the ZIP and open PowerShell in the `cohire` folder 
 ```powershell
 py -3.12 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.lock.txt
+.\.venv\Scripts\python.exe -m pip install tzdata
 .\.venv\Scripts\python.exe -m pip install --no-deps -e .
 .\.venv\Scripts\python.exe scripts\configure.py
 .\.venv\Scripts\python.exe -m alembic upgrade head
 .\.venv\Scripts\python.exe -m scripts.init_db
 ```
 
-`configure.py` creates `.env` with new local secrets and refuses to overwrite an existing file. Keep the file private. The default SQLite setup is an isolated demo convenience; PostgreSQL is the intended authoritative deployment database. Dependencies were resolved on Python 3.12 Linux; the Windows instructions are supplied but were not executed on a Windows host.
+`tzdata` is required on Windows for `zoneinfo.ZoneInfo` timezone validation (such as `Asia/Kolkata`). `configure.py` creates `.env` with new local secrets and refuses to overwrite an existing file. Keep the file private. The default SQLite setup is an isolated demo convenience; PostgreSQL 16 is the intended authoritative deployment database. These commands were verified on Windows with Python 3.12.10. Always run the API, worker, and A2A server from the project root containing `.env`.
 
 Start the API in terminal 1:
 
@@ -65,7 +66,9 @@ npm ci
 npm run dev
 ```
 
-Open http://127.0.0.1:3000, enter your local access token, and choose **Connect / refresh**. The token stays in page memory. The interface offers Intake, Jobs & rubric, Match review, Interviews, and Audit. Refresh progress after the separate worker processes a request. The API returns structured queued/completed/partial/failed/canceled states.
+If `npm` is not recognized in an already-open PowerShell session after installing Node.js, open a new terminal or refresh `PATH` with `$env:PATH = "C:\Program Files\nodejs;$env:PATH"`.
+
+Open http://127.0.0.1:3000, paste **only** the token value after `DEV_TOKEN=` from `.env` (no prefix, quotes, or trailing spaces), and choose **Connect / refresh**. The token stays in page memory. The interface offers Intake, Jobs & rubric, Match review, Interviews, and Audit. Refresh progress after the separate worker processes a request. The API returns structured queued/completed/partial/failed/canceled states.
 
 1. Upload a job and each resume in **Intake**.
 2. Inspect and edit the sanitized text, then explicitly approve it. Names without labels and indirect identifiers need manual removal.
@@ -119,21 +122,21 @@ URL-encode special password characters. Initialize the vault with `python -m scr
 Install Google Cloud CLI. In your chosen project, configure Vertex AI access and the necessary IAM permissions with your cloud administrator. No resources are created by the supplied scripts.
 
 ```powershell
-gcloud auth application-default login
+gcloud auth application-default login --project YOUR_PROJECT
 ```
 
-Edit `.env` with a model ID actually available to your project and region:
+Edit `.env` with a model ID and location available to your project (for example, `GOOGLE_CLOUD_LOCATION=global` with `gemini-3.5-flash` where regional endpoints do not expose the model):
 
 ```dotenv
 AGENT_MODE=gemini
 GOOGLE_GENAI_USE_VERTEXAI=true
 GOOGLE_CLOUD_PROJECT=YOUR_PROJECT
-GOOGLE_CLOUD_LOCATION=YOUR_REGION
+GOOGLE_CLOUD_LOCATION=global
 GEMINI_PARSE_MODEL=YOUR_AVAILABLE_MODEL_ID
 GEMINI_MATCH_MODEL=YOUR_AVAILABLE_MODEL_ID
 ```
 
-Restart the API/worker. Model IDs are intentionally not guessed. Run only synthetic data for the first cloud smoke test. `app/agents/specialists.py` constructs schema-constrained ADK `LlmAgent` instances with no write tools. `Runner` uses isolated short-lived sessions; the database workflow owns durable recovery. The model performs extraction/assessment; Python validates citations and computes the final score.
+`app/config.py` calls `load_dotenv()` so `.env` Vertex AI variables are loaded into the process environment for `google-adk` / `google-genai`. Restart the API/worker/A2A processes from the project root after editing `.env`. Run only synthetic data for the first cloud smoke test. `app/agents/specialists.py` constructs schema-constrained ADK `LlmAgent` instances with no write tools. `Runner` uses isolated short-lived sessions; the database workflow owns durable recovery. The model performs extraction/assessment; Python validates citations and computes the final score.
 
 The current MVP extracts professional **skill evidence**. Experience intervals, qualification verification, semantic retrieval, equivalence governance and multilingual/OCR extraction require expansion and evaluation before broad recruitment use. Gemini mode can interpret more skill language than the fixture parser but does not remove these scope limits.
 
@@ -179,11 +182,11 @@ Operation IDs persist before inference and map to deterministic task IDs. Retrie
 
 ## Troubleshooting
 
-- **401:** ensure `.env` has `DEV_AUTH=true`, use its generated token, and restart processes after edits.
-- **422:** inspect API validation. Missing `Idempotency-Key`, residual PII, malformed documents and unsupported weights fail closed.
+- **401:** ensure `.env` has `DEV_AUTH=true`, start processes from the project root containing `.env`, paste only the raw `DEV_TOKEN` value (without `DEV_TOKEN=`, `Bearer `, or trailing whitespace), and restart processes after edits.
+- **422:** inspect API validation. Missing `Idempotency-Key`, residual PII, malformed documents, unsupported weights, and missing `tzdata` on Windows (`INVALID_FUTURE_AWARE_SLOT`) fail closed.
 - **409:** source/rubric already frozen, a key was reused with different data, or recruiter advance is missing. Create a new job for rubric changes.
 - **Queued forever:** start the worker in the same folder with the same `.env`, database and tenant.
-- **Failed model step:** inspect the safe workflow error, verify model IDs/ADC/region, then submit a new reviewed source/run. Inputs are not logged in error messages.
+- **Failed model step:** inspect the safe workflow error, verify model IDs/ADC/location (`global` vs regional endpoint), then submit a new reviewed source/run. Inputs are not logged in error messages.
 - **A2A error:** check both credentials, configured tenant, port and the pinned dependencies. Retry the same operation; do not invent a new operation after a timeout.
 - **Scanned PDF:** provide a reviewed transcription; there is no OCR service in this release.
 - **Port busy:** choose another `--port`, update API/frontend/A2A URLs consistently.

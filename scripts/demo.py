@@ -29,7 +29,12 @@ job=source('job','job.txt')
 candidates=[source('resume',name) for name in ('resume_a.txt','resume_b.txt','resume_c.txt')]
 profile=next(j for j in get('/v1/jobs') if j['id']==job)
 weights={'python':.3,'fastapi':.3,'postgresql':.3,'gcp':.1}
-post(f'/v1/jobs/{job}/approve',json={'weights':{r['id']:weights[r['term']] for r in profile['profile']['requirements']}})
+def weight_for(term):
+    t=term.lower()
+    for k,v in weights.items():
+        if k in t: return v
+    return 0.1
+post(f'/v1/jobs/{job}/approve',json={'weights':{r['id']:weight_for(r['term']) for r in profile['profile']['requirements']}})
 run=post('/v1/runs',json={'job_id':job,'candidate_ids':candidates});wait(run['workflow_id'])
 ranked=get('/v1/runs/'+run['workflow_id']+'/matches')
 post('/v1/matches/'+ranked[0]['id']+'/review',json={'action':'advance','reason':'Evidence reviewed; proceed to a technical discussion.'})
